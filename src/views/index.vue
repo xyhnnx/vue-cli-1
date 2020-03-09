@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div class="page">
     <!--顶部-->
     <van-nav-bar>
       <div slot="title">
-        <van-icon name="service-o" />
+        <van-icon name="service-o"/>
         {{phone}}
       </div>
       <div slot="right">
         <a :href="`tel:${phone}`" id="phone">
-          <van-icon class="phone" name="phone" />
+          <van-icon class="phone" name="phone"/>
         </a>
       </div>
     </van-nav-bar>
@@ -25,10 +25,10 @@
 
     <div class="grid-box">
       <van-grid>
-        <van-grid-item @click.native="gridClick('/About')" icon="photo-o" text="企业资质" />
-        <van-grid-item @click.native="gridClick('/hot-line')" icon="photo-o" text="热门路线" />
-        <van-grid-item @click.native="gridClick('/hot-line')" icon="photo-o" text="订单展示" />
-        <van-grid-item @click.native="gridClick('')" icon="photo-o" text="查询报价" />
+        <van-grid-item @click.native="gridClick('/About')" icon="photo-o" text="企业资质"/>
+        <van-grid-item @click.native="gridClick('/hot-line')" icon="photo-o" text="热门路线"/>
+        <van-grid-item @click.native="gridClick('/hot-line')" icon="photo-o" text="订单展示"/>
+        <van-grid-item @click.native="gridClick('')" icon="photo-o" text="查询报价"/>
       </van-grid>
     </div>
 
@@ -45,11 +45,11 @@
           </div>
         </div>
         <div class="center" @click="changeArea">
-          <van-icon name="exchange" />
+          <van-icon name="exchange"/>
         </div>
-        <div class="area-item" >
+        <div class="area-item">
           <div class="label">目的地</div>
-          <div class="value"  @click="selectArea(2)">
+          <div class="value" @click="selectArea(2)">
             <template v-if="endList && endList.length">
               {{endList.map(e=>e.name).join('/')}}
             </template>
@@ -100,7 +100,7 @@
     </van-popup>
 
     <!--底部-->
-    <van-tabbar>
+    <van-tabbar value="ss">
       <van-tabbar-item @click.native="tabbarItemClick(1)" icon="phone">电话咨询</van-tabbar-item>
       <van-tabbar-item @click.native="tabbarItemClick(2)" icon="wechat">微信联系</van-tabbar-item>
       <van-tabbar-item @click.native="tabbarItemClick(3)" icon="down">APP</van-tabbar-item>
@@ -108,9 +108,10 @@
   </div>
 </template>
 <script>
-  import areaList from '../components/area'
+  import areaList from '../components/area';
+
   export default {
-    data () {
+    data() {
       return {
         phone: '400-990-6596',
         areaList,
@@ -123,45 +124,45 @@
           1: '车1',
           2: '车2',
         }
-      }
+      };
     },
-    watch: {
-    },
+    watch: {},
     methods: {
-      tabbarItemClick (val) {
-        if(val === 2) { // 微信联系
+      tabbarItemClick(val) {
+        if (val === 2) { // 微信联系
           this.$router.push({
             path: '/QRcode'
-          })
-        } else if(val === 1){
-          document.getElementById('phone').click()
+          });
+        } else if (val === 1) {
+          document.getElementById('phone')
+          .click();
         }
       },
-      gridClick (path) {
+      gridClick(path) {
         this.$router.push({
           path
-        })
+        });
       },
-      changeArea () {
+      changeArea() {
         let a = this.startList;
-        this.startList = this.endList
-        this.endList = a
+        this.startList = this.endList;
+        this.endList = a;
       },
-      selectArea (val) {
-        this.showPopup = true
-        this.selectType = val
+      selectArea(val) {
+        this.showPopup = true;
+        this.selectType = val;
       },
-      confirmArea (val) {
-        console.log(val)
-        this.showPopup = false
-        if(this.selectType === 1) { // 出发
-          this.startList = val
-        }else{
-          this.endList = val
+      confirmArea(val) {
+        console.log(val);
+        this.showPopup = false;
+        if (this.selectType === 1) { // 出发
+          this.startList = val;
+        } else {
+          this.endList = val;
         }
       },
-      confirmCar (val) {
-        console.log(val)
+      confirmCar(val) {
+        console.log(val);
       }
     },
     mounted() {
@@ -170,18 +171,29 @@
 </script>
 <style lang="stylus" scoped>
   $c-border = #eee
+  $c-red = #ff644b
+  $c-black = #101010
+  // 颜色覆盖
+  .page
+    .van-tabbar-item__text
+      color $c-black
+
   .area-select
     display flex
     border-bottom 1px solid $c-border
     padding-bottom 20px
     justify-content space-around
     align-items center
+
     .center
       font-size 30px
+
     .area-item
       flex 1
+
       .label
         color #999
+
       .value
         font-size 22px
         line-height 40px
@@ -197,14 +209,17 @@
   .btn-box
     // color #ff644b
     padding 10px
+
   .my-swipe
     >>> .van-swipe-item
       height: 150px
+
       .img
         display block
         width 100%
+
   .grid-box
-    >>>.van-grid-item__icon
+    >>> .van-grid-item__icon
       background-color red
       width 40px
       height 40px
@@ -212,6 +227,7 @@
       font-size 16px
       line-height 40px
       color white
+
   .phone
     font-size 20px
 </style>
